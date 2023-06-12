@@ -7,7 +7,7 @@ const router = Router();
 router.get('/', (req, res)=>{
     res.json({
         "statusCode": 200,
-        "msg": "Api rodando"
+        "msg": "Prisma rodando"
     })
 })
 
