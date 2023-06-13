@@ -15,7 +15,7 @@ app.get("/get", function (req, res) {
 });
 
 app.post("/post", function (req, res) {
-  res.send("Got a POST request");
+  res.send("POST ON");
 });
 app.put("/put", function (req, res) {
   res.send("Got a PUT request at /user");
