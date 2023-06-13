@@ -1,18 +1,22 @@
-// import { Router } from "express";
+const express = require("express");
+const app = express();
+const port = 3000;
 
-// import {criarTabela, atualizarPessoa, obterPessoaPorId } from './app.ts';
+app.get("/", (req, res) => {
+  res.send("SERVER LIGADO");
+});
 
-// const router = Router();
+app.listen(port, () => {
+  console.log(`Server ligado ${port}`);
+});
 
-// router.get('/', (req, res)=>{
-//     res.json({
-//         "statusCode": 200,
-//         "msg": "Prisma rodando"
-//     })
-// })
+app.get("/get",  function (req, res) {
+  res.send("GET ON");
+});
 
-// router.get('/pessoa', obterPessoaPorId);
-// router.put('/pessoa', atualizarPessoa);
-// router.post('/pessoa', criarTabela);
-
-// export default router;
+app.post("/post", function (req, res) {
+  res.send("Got a POST request");
+});
+app.put("/put", function (req, res) {
+  res.send("Got a PUT request at /user");
+});

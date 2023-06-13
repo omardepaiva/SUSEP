@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 
+
 const prisma = new PrismaClient();
+
 
 // Criar uma pessoa
 async function criarPessoa(
