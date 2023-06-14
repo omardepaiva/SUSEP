@@ -5,6 +5,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+app.use(express.json());
 app.get("/up", (req, res) => {
   res.send("SERVER LIGADO");
 });
@@ -18,13 +19,33 @@ app.get("/", async (req, res) => {
   res.send(data);
 });
 
-app.post("/", async (req, res) => {
-  const data = req.body;
-  const createdData = await prisma.Pessoa.create({ data });
-  res.send(createdData);
+app.post("/post", async (req, res) => {
+  const {
+    nome,
+    cpf,
+    dataNascimento,
+    email,
+    unidadeId,
+    tipofuncaoId,
+    cargaHoraria,
+    situcacaoPessoa,
+  } = req.body;
+  const result = await prisma.Pessoa.create({
+    data: {
+      nome,
+      cpf,
+      dataNascimento,
+      email,
+      unidadeId,
+      tipofuncaoId,
+      cargaHoraria,
+      situcacaoPessoa,
+    },
+  });
+  res.json(result);
 });
 
-app.put("/", async (req, res) => {
+app.put("/:id", async (req, res) => {
   const { id } = req.params;
   const updatedData = await prisma.Pessoa.update({
     where: { id },
