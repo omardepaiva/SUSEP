@@ -3,7 +3,7 @@ BEGIN TRY
 BEGIN TRAN;
 
 -- CreateTable
-CREATE TABLE [dbo].[Pessoa] (
+CREATE TABLE [dbo].[pessoa] (
     [id] INT NOT NULL IDENTITY(1,1),
     [nome] NVARCHAR(1000) NOT NULL,
     [cpf] NVARCHAR(1000) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE [dbo].[Pessoa] (
     [tipoFuncaoId] INT NOT NULL,
     [cargaHoraria] INT NOT NULL,
     [situacaoPessoa] INT NOT NULL,
-    CONSTRAINT [Pessoa_pkey] PRIMARY KEY CLUSTERED ([id])
+    CONSTRAINT [pessoa_pkey] PRIMARY KEY CLUSTERED ([id])
 );
 
 COMMIT TRAN;
