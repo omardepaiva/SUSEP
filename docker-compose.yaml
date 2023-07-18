@@ -25,11 +25,11 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      - ./:/home/node/app/server.ts
+      - ./:/home/node/app
       - ./package.json:/home/node/app/package.json
     ports:
       - 3000:3000/tcp
-    command: "npm install && npm start"
+    command: "npm start"
     networks:
       - container
   # prisma:
