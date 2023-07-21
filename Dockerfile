@@ -1,12 +1,30 @@
 # Imagem do container
-FROM node:16.16.0
-# Enviroment variable
-ENV WORKDIR=/usr/api/prisma
-# Indica qual é o diretório de trabalho
-WORKDIR ${WORKDIR}
-# Copia todos os arquivos para o workdir
-COPY . .
-RUN npm ci
-RUN npm install -g nodemon
+FROM node:alpine
 
-# CMD ["npm", "start"]
+
+# Indica qual é o diretório de trabalho
+WORKDIR /app
+# COPY package.json and package-lock.json files
+COPY package*.json ./
+
+# generated prisma files
+COPY prisma ./prisma/
+
+# COPY ENV variable
+COPY .env ./
+
+# COPY tsconfig.json file
+COPY tsconfig.json ./
+
+# COPY
+COPY . .
+
+RUN npm install
+
+RUN npx prisma generate
+
+# Run and expose the server on port 3000
+EXPOSE 3000
+
+# A command to start the server
+CMD npm start

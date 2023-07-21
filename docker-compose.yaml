@@ -33,37 +33,17 @@ services:
     networks:
       - container
 
-  prisma:
-    container_name: docker-prisma
+  prisma-api:
+    stdin_open: true
     build:
-      context: ./
+      context: .
       dockerfile: Dockerfile
-    restart: always
-    ports:
-      - 3000:3000
-    networks:
-      - container
-    command: >
-      bash -c '
-        npx prisma db push 
-        npx prisma generate 
-        npm start
-      '
+    container_name: prisma-api
     depends_on:
       - db
-    environment:
-      PRISMA_CONFIG: |
-        managementApiSecret: ${__YOUR_MANAGEMENT_API_SECRET__}
-        port: ${__YOUR_PRISMA_SERVER_PORT__}
-        databases:
-          default:
-            connector: ${__YOUR_DATABASE_CONNECTOR__}
-            host: ${__YOUR_DATABASE_HOST__}
-            port: ${__YOUR_DATABASE_PORT__}
-            user: ${__YOUR_DATABASE_USER__}
-            password: ${__YOUR_DATABASE_PASSWORD__}
-            connectionLimit: ${__YOUR_CONNECTION_LIMIT__}
-    mem_limit: 512m
+    ports:
+      - "3000:3000"
+    restart: always
 
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -79,7 +59,6 @@ services:
       - container
 
 volumes:
-  data-prisma:
   httpdconf:
   httpdhtml:
 
