@@ -1,30 +1,32 @@
 # Imagem do container
 FROM node:alpine
 
-
 # Indica qual é o diretório de trabalho
 WORKDIR /app
-# COPY package.json and package-lock.json files
+
+# Copia os arquivos package.json e package-lock.json
 COPY package*.json ./
 
-# generated prisma files
+# Arquivos gerados pelo Prisma
 COPY prisma ./prisma/
 
-# COPY ENV variable
+# Copia as variáveis de ambiente (env)
 COPY .env ./
 
-# COPY tsconfig.json file
+# Copia o arquivo tsconfig.json
 COPY tsconfig.json ./
 
-# COPY
+# Copia os outros arquivos e diretórios
 COPY . .
 
+# Executa a instalação das dependências
 RUN npm install
 
+# Gera os arquivos do Prisma
 RUN npx prisma generate
 
-# Run and expose the server on port 3000
+# Expõe a porta 3000 para acesso externo
 EXPOSE 3000
 
-# A command to start the server
+# Comando para iniciar o servidor
 CMD npm start
