@@ -31,3 +31,4 @@ EXPOSE 3000
 
 # Comando para iniciar o servidor
 CMD npm start
+
