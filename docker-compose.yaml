@@ -44,6 +44,8 @@ services:
     ports:
       - "3000:3000"
     restart: always
+    env_file:
+      - .env
 
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest

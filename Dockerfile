@@ -11,7 +11,7 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # Copia as variáveis de ambiente (env)
-COPY .env ./
+COPY ./ *env* ./
 
 # Copia o arquivo tsconfig.json
 COPY tsconfig.json ./
@@ -24,6 +24,7 @@ RUN npm install
 
 # Gera os arquivos do Prisma
 RUN npx prisma generate
+
 
 # Expõe a porta 3000 para acesso externo
 EXPOSE 3000
