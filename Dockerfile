@@ -11,7 +11,7 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # Copia as variáveis de ambiente (env)
-COPY ./ *env* ./
+COPY ./.env /app/
 
 # Copia o arquivo tsconfig.json
 COPY tsconfig.json ./
