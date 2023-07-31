@@ -9,26 +9,43 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./httpd/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
-      - ./httpd/conf//httpd-ssl.conf:/usr/local/apache2/conf/extra/httpd-ssl.conf
-      - ./certs/server.crt:/usr/local/apache2/conf/server.crt
-      - ./certs/server.key:/usr/local/apache2/conf/server.key
+      - ${HTTPD_CONF}:/usr/local/apache2/conf/httpd.conf
+      - ${HTTPD_SSL_CONF}:/usr/local/apache2/conf/extra/httpd-ssl.conf
+      - ${SSL_CERT}:/usr/local/apache2/conf/server.crt
+      - ${SSL_KEY}:/usr/local/apache2/conf/server.key
     networks:
       - container
     dns:
-      - 8.8.8.8
-      - 1.1.1.1
+      - ${DNS1}
+      - ${DNS2}
   node:
     image: "node:19"
-    user: "node"
-    working_dir: /app
+    user: ${NODE_USER}
+    working_dir: /home/node/app
     environment:
       - NODE_ENV=production
     volumes:
-      - ./:/app
+      - ./:/home/node/app
+      - ./package.json:/home/node/app/package.json
     ports:
-      - 3000:3000/tcp
-    command: /bin/bash -c "npm install && npm start && apt-get update && apt-get install openssl "
+      - 3030:3030/tcp
+    command: "npm start"
+    networks:
+      - container
+
+  prisma-api:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: prisma-api
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    restart: always
+    env_file:
+      - .env
     networks:
       - container
 
