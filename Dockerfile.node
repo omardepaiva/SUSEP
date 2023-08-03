@@ -1,5 +1,5 @@
 # Imagem do container
-FROM node:alpine
+FROM node:latest
 
 # Indica qual é o diretório de trabalho
 WORKDIR /app
