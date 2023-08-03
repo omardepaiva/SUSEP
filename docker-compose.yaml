@@ -19,6 +19,9 @@ services:
       - ${DNS1}
       - ${DNS2}
   node:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: "node:19"
     user: ${NODE_USER}
     working_dir: /home/node/app
@@ -30,6 +33,8 @@ services:
     ports:
       - 3030:3030/tcp
     command: "npm start"
+    env_file:
+      - .env
     networks:
       - container
 
