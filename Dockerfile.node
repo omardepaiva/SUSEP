@@ -1,5 +1,7 @@
 FROM node:19
 WORKDIR /home/node/app
+COPY tsconfig.json ./
+COPY . .
 COPY package*.json ./
 RUN npm install
 EXPOSE 3030
