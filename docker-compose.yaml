@@ -19,10 +19,10 @@ services:
       - ${DNS1}
       - ${DNS2}
   node:
+    container_name: node
     build:
       context: .
       dockerfile: Dockerfile
-    image: "node:19"
     user: ${NODE_USER}
     working_dir: /home/node/app
     environment:
@@ -30,6 +30,7 @@ services:
     volumes:
       - ./:/home/node/app
       - ./package.json:/home/node/app/package.json
+      - ./tsconfig.json:/home/node/app/tsconfig.json
     ports:
       - 3030:3030/tcp
     command: "npm start"
