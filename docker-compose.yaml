@@ -22,7 +22,7 @@ services:
     container_name: node
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.node
     user: ${NODE_USER}
     working_dir: /home/node/app
     environment:
