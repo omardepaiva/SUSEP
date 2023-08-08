@@ -58,6 +58,7 @@ services:
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: db
+    user: root
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=omar7410!
