@@ -19,6 +19,9 @@ COPY tsconfig.json ./
 # Copia os outros arquivos e diretórios
 COPY . .
 
+# Instalando o NODE. REDHAT
+RUN yum install node 
+
 # Executa a instalação das dependências
 RUN npm install
 
